@@ -15,6 +15,9 @@ while True:
     _input = input("$ ")
     parts = shlex.split(_input)
 
+    if not parts:
+        continue
+
     for command in COMMANDS:
         prefix_len = command.has_prefix(parts)
 
@@ -22,11 +25,12 @@ while True:
             continue
 
         try:
-            command.run(parts[prefix_len:])
-            break
+            command.run(*parts[prefix_len:])
 
         except commands.ValidationError as e:
             print("Error: " + str(e))
+
+        break
 
     else:
         print("Error: No command found. Type help")

@@ -6,7 +6,8 @@ class BaseCommand:
     params = []
 
     def run(self, *args):
-        pass
+        if len(args) != len(self.params):
+            raise ValidationError('params length mismatch')
 
     def has_prefix(self, parts: list):
         if len(self.prefix_list) > len(parts):
