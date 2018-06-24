@@ -1,5 +1,4 @@
 import shlex
-from decouple import AutoConfig
 import commands
 
 COMMANDS = [
