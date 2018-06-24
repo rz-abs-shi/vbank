@@ -8,8 +8,10 @@ COMMANDS = [
 help_command = commands.Help(COMMANDS)
 COMMANDS.insert(0, help_command)
 
-print(COMMANDS)
-while True:
+exit_command = commands.Exit()
+COMMANDS.append(exit_command)
+
+while not exit_command.exit:
 
     _input = input("$ ")
     parts = shlex.split(_input)
@@ -28,6 +30,7 @@ while True:
 
         except commands.ValidationError as e:
             print("Error: " + str(e))
+            print(command.get_help())
 
         break
 
