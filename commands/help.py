@@ -11,9 +11,4 @@ class Help(BaseCommand):
     def run(self, *args):
         print("Commands list")
         for com in self.commands:
-            help_row = '   ' + com.prefix
-
-            if com.help:
-                help_row += ': ' + com.help
-
-            print(help_row)
+            print('   ' + com.get_help())

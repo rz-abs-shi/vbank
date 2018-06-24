@@ -1,12 +1,9 @@
 
 
 class BaseCommand:
-    prefix_list = [None]
+    prefix_list = []
     help = ''
-
-    @property
-    def prefix(self):
-        return ' '.join(self.prefix_list)
+    params = []
 
     def run(self, *args):
         pass
@@ -20,6 +17,25 @@ class BaseCommand:
                 return -1
 
         return len(self.prefix_list)
+
+    def get_prefix(self):
+        return ' '.join(self.prefix_list)
+
+    def get_params(self):
+        return ' '.join(['(%s)' % param for param in self.params])
+
+    def get_help(self):
+        message = self.get_prefix()
+        params = self.get_params()
+
+        if params:
+            message += ' ' + params
+
+        if self.help:
+            message += ': ' + self.help
+
+        return message
+
 
 class ValidationError(Exception):
     pass
