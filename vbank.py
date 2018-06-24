@@ -9,6 +9,7 @@ COMMANDS = [
 help_command = commands.Help(COMMANDS)
 COMMANDS.insert(0, help_command)
 
+print(COMMANDS)
 while True:
 
     _input = input("$ ")
@@ -22,9 +23,10 @@ while True:
 
         try:
             command.run(parts[prefix_len:])
+            break
 
         except commands.ValidationError as e:
             print("Error: " + str(e))
 
     else:
-        print("Error: No command found. Type help!")
+        print("Error: No command found. Type help")
