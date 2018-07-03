@@ -1,9 +1,9 @@
-from commands import BaseCommand
+from cli import BaseCommand
 
 
 class Help(BaseCommand):
     prefix_list = ['help']
-    help = 'Show the list of commands'
+    help = 'Show the list of cli'
 
     def __init__(self, commands):
         self.commands = commands

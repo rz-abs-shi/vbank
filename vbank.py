@@ -1,18 +1,18 @@
 import shlex
-import commands
+import cli
 
 COMMANDS = [
-    commands.CreateManager(),
-    commands.Credit(),
+    cli.CreateManager(),
+    cli.Credit(),
 ]
 
-help_command = commands.Help(COMMANDS)
+help_command = cli.Help(COMMANDS)
 COMMANDS.insert(0, help_command)
 
-exit_command = commands.Exit()
+exit_command = cli.Exit()
 COMMANDS.append(exit_command)
 
-commands.Credit().run()
+cli.Credit().run()
 
 while not exit_command.exit:
 
@@ -31,7 +31,7 @@ while not exit_command.exit:
         try:
             command.run(*parts[prefix_len:])
 
-        except commands.ValidationError as e:
+        except cli.ValidationError as e:
             print("Error: " + str(e))
             print(command.get_help())
 

@@ -1,4 +1,4 @@
-from commands import BaseCommand
+from cli import BaseCommand
 
 
 class Exit(BaseCommand):

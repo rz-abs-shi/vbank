@@ -1,4 +1,4 @@
-from commands import BaseCommand
+from cli import BaseCommand
 
 
 class Credit(BaseCommand):
@@ -15,6 +15,6 @@ Virtual Bank Project
     Course: Data and Network Security
     Sharif University of Technology, Summer 1397
 
-Please type `help` to see commands...
+Please type `help` to see cli...
 """
               )
