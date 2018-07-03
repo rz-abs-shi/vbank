@@ -1,12 +1,24 @@
 import shlex
 
 from cli import CommandProvider, ValidationError
+from auth import Auth
 
 command_provider = CommandProvider()
 
+
+def get_command_prefix():
+    user = Auth.get_user()
+
+    if user:
+        return user.username + ' $ '
+
+    else:
+        return '$ '
+
+
 while not command_provider.exit_command.exit:
 
-    _input = input("$ ")
+    _input = input(get_command_prefix())
     parts = shlex.split(_input)
 
     if not parts:
@@ -18,8 +30,11 @@ while not command_provider.exit_command.exit:
         if prefix_len < 0:
             continue
 
+        params = parts[prefix_len:]
+
         try:
-            command.run(*parts[prefix_len:])
+            command.validate_params(params)
+            command.run(*params)
 
         except ValidationError as e:
             print("Error: " + str(e))

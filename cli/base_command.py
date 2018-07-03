@@ -37,6 +37,14 @@ class BaseCommand:
 
         return message
 
+    def show(self, user):
+        return True
+
+    def validate_params(self, params):
+        if len(params) != len(self.params):
+            raise ValidationError(
+                'This command took %d params, but you provided %d' % (len(self.params), len(params))
+            )
 
 class ValidationError(Exception):
     pass

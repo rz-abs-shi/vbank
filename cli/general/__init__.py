@@ -2,3 +2,5 @@ from .create_manager import CreateManager
 from .credit import Credit
 from .exit import Exit
 from .help import Help
+from .login import Login
+from .logout import Logout

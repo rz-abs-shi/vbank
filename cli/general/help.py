@@ -3,7 +3,7 @@ from cli import BaseCommand
 
 class Help(BaseCommand):
     prefix_list = ['help']
-    help = 'Show the list of cli'
+    help = 'Show the list of commands'
 
     def __init__(self, command_provider):
         self.command_provider = command_provider
