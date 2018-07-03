@@ -2,6 +2,11 @@ from models import User
 from decouple import config
 
 
+def on_user_changed(user):
+    from cli import command_provider
+    command_provider.update(user)
+
+
 class Auth:
     _user = None
 
@@ -12,6 +17,8 @@ class Auth:
     def login_user(cls, username, password):
         cls._user = cls.superuser
 
+        on_user_changed(cls._user)
+
         return cls._user
 
     @classmethod
@@ -21,6 +28,7 @@ class Auth:
     @classmethod
     def logout_user(cls):
         cls._user = None
+        on_user_changed(cls._user)
 
     @classmethod
     def get_user(cls):

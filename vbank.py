@@ -1,9 +1,7 @@
 import shlex
 
-from cli import CommandProvider, ValidationError
+from cli import command_provider, ValidationError
 from auth import Auth
-
-command_provider = CommandProvider()
 
 
 def get_command_prefix():
