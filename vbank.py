@@ -3,6 +3,7 @@ import commands
 
 COMMANDS = [
     commands.CreateManager(),
+    commands.Credit(),
 ]
 
 help_command = commands.Help(COMMANDS)
@@ -10,6 +11,8 @@ COMMANDS.insert(0, help_command)
 
 exit_command = commands.Exit()
 COMMANDS.append(exit_command)
+
+commands.Credit().run()
 
 while not exit_command.exit:
 
