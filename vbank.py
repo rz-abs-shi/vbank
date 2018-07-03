@@ -1,20 +1,10 @@
 import shlex
-import cli
 
-COMMANDS = [
-    cli.CreateManager(),
-    cli.Credit(),
-]
+from cli import CommandProvider, ValidationError
 
-help_command = cli.Help(COMMANDS)
-COMMANDS.insert(0, help_command)
+command_provider = CommandProvider()
 
-exit_command = cli.Exit()
-COMMANDS.append(exit_command)
-
-cli.Credit().run()
-
-while not exit_command.exit:
+while not command_provider.exit_command.exit:
 
     _input = input("$ ")
     parts = shlex.split(_input)
@@ -22,7 +12,7 @@ while not exit_command.exit:
     if not parts:
         continue
 
-    for command in COMMANDS:
+    for command in command_provider.get_commands():
         prefix_len = command.has_prefix(parts)
 
         if prefix_len < 0:
@@ -31,7 +21,7 @@ while not exit_command.exit:
         try:
             command.run(*parts[prefix_len:])
 
-        except cli.ValidationError as e:
+        except ValidationError as e:
             print("Error: " + str(e))
             print(command.get_help())
 

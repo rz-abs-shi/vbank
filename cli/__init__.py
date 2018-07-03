@@ -1,2 +1,5 @@
 from .base_command import BaseCommand, ValidationError
-from cli.general.create_manager import CreateManager
+
+from . import general
+
+from .command_provider import CommandProvider
