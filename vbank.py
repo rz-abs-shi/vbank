@@ -38,4 +38,4 @@ while not exit_command.exit:
         break
 
     else:
-        print("Error: No command found. Type help")
+        print("Error: No such command found. Please type `help`.")
