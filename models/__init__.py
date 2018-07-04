@@ -1,3 +1,4 @@
+from .base_model import BaseModel
 from .user import User
 from .central_bank import CentralBank
 from .bank import Bank

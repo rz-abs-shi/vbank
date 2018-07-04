@@ -38,6 +38,9 @@ while not command_provider.exit_command.exit:
             print("Error: " + str(e))
             print(command.get_help())
 
+        except Exception as e:
+            print("Error: " + str(e))
+
         break
 
     else:

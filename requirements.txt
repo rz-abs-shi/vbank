@@ -1,3 +1,4 @@
 pycryptodome
 peewee
 python-decouple
+peewee_migrate

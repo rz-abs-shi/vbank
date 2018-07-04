@@ -1,8 +1,9 @@
 import peewee
 from models import User, Bank
+from models import BaseModel
 
 
-class Wallet(peewee.Model):
+class Wallet(BaseModel):
 
     owner = peewee.ForeignKeyField(User)
 

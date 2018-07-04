@@ -1,10 +1,12 @@
 import peewee
+
 from crypto.utils import sha512
+from models import BaseModel
 
 
-class User(peewee.Model):
+class User(BaseModel):
 
-    username = peewee.CharField(max_length=64)
+    username = peewee.CharField(max_length=64, unique=True)
     secret = peewee.CharField()
 
     def set_password(self, password):

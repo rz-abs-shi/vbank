@@ -10,12 +10,14 @@ def on_user_changed(user):
 class Auth:
     _user = None
 
-    superuser = User(username=config('superuser_username'))
-    superuser.set_password(config('superuser_password'))
-
     @classmethod
     def login_user(cls, username, password):
-        cls._user = cls.superuser
+
+        secret = User.get_hash_of_password(username, password)
+        try:
+            cls._user = User.get(username=username, secret=secret)
+        except User.DoesNotExist:
+            raise Exception('No user exists with this username or password')
 
         on_user_changed(cls._user)
 

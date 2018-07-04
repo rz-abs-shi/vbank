@@ -1,8 +1,8 @@
 import peewee
-from models import User, CentralBank
+from models import BaseModel, User, CentralBank
 
 
-class Bank(peewee.Model):
+class Bank(BaseModel):
 
     manager = peewee.ForeignKeyField(User)
 

@@ -24,3 +24,6 @@ class SetFieldCommand(CentralBankBaseCommand):
         setattr(central_bank, self.field_name, value)
 
         central_bank.save()
+
+    def get_help(self):
+        return ''
