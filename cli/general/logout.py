@@ -4,7 +4,7 @@ from auth import Auth
 
 class Logout(BaseCommand):
     prefix_list = ('logout',)
-    params = ()
+    params_template_list = ()
 
     help = 'Logout user.'
 

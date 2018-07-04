@@ -11,4 +11,4 @@ class Help(BaseCommand):
     def run(self, *args):
         print("Commands list")
         for com in self.command_provider.get_commands():
-            print('   ' + com.get_help())
+            print('   ' + com.get_description())

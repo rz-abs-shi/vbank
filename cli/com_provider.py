@@ -10,6 +10,13 @@ class CommandProvider:
 
         self.all_commands = [
 
+            # central bank
+            cli.central_bank.SetNumberOfTransactionsInBlockCommand(),
+            cli.central_bank.SetTransactionFeeCommand(),
+            cli.central_bank.SetDifficultyCommand(),
+            cli.central_bank.SetBlockMinerRewardCommand(),
+            cli.central_bank.SetBankBalanceMinPercentForLoanCommand(),
+
             # general
             cli.general.Login(),
             self.help_command,

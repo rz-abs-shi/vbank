@@ -4,7 +4,7 @@ from models import BaseModel, User
 
 class CentralBank(BaseModel):
 
-    manager = peewee.ForeignKeyField(User, backref='central_bank')
+    manager = peewee.ForeignKeyField(User, backref='central_bank', unique=True)
 
     number_of_transactions_in_block = peewee.SmallIntegerField(default=0)
     transaction_fee = peewee.FloatField(default=0)

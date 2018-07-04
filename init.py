@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     # create superuser
     try:
-        user = models.User(username=config('superuser_username'))
+        user = models.User(username=config('superuser_username'), is_superuser=True)
         user.set_password(config('superuser_password'))
         user.save()
     except peewee.IntegrityError:

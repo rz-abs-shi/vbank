@@ -4,7 +4,7 @@ from auth import Auth
 
 class Login(BaseCommand):
     prefix_list = ('login', )
-    params = ('username', 'password')
+    params_template_list = ('username', 'password')
 
     help = 'Login user.'
 

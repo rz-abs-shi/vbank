@@ -11,10 +11,10 @@ In the name of God
 
 Virtual Bank Project
 
-    Created with love by `Mostafa Jangali`, `Reza Abbasi`
+    Created with love by `Mostafa Jangali` & `Reza Abbasi`
     Course: Data and Network Security
     Sharif University of Technology, Summer 1397
 
-Please type `help` to see cli...
+Please type `help` to see commands.
 """
               )

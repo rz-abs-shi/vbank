@@ -36,7 +36,7 @@ while not command_provider.exit_command.exit:
 
         except ValidationError as e:
             print("Error: " + str(e))
-            print(command.get_help())
+            print(command.get_description())
 
         except Exception as e:
             print("Error: " + str(e))

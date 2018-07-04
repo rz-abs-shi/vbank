@@ -5,8 +5,7 @@ import peewee
 class SetFieldCommand(CentralBankBaseCommand):
     field_name = ''
     param_key = ''
-
-    params = (param_key, )
+    help = ''
 
     _filed_types = {
         peewee.IntegerField: int,
@@ -25,5 +24,5 @@ class SetFieldCommand(CentralBankBaseCommand):
 
         central_bank.save()
 
-    def get_help(self):
-        return ''
+    def get_params_template_list(self):
+        return (self.param_key,)
