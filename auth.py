@@ -24,10 +24,6 @@ class Auth:
         return cls._user
 
     @classmethod
-    def signup_user(cls, username, password):
-        pass
-
-    @classmethod
     def logout_user(cls):
         cls._user = None
         on_user_changed(cls._user)
