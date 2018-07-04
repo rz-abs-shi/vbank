@@ -8,6 +8,7 @@ class CreateManager(BaseCommand):
 
     prefix_list = ('create', 'manager')
     params_template_list = ('username', 'password')
+    help = 'Creates a central bank manager'
 
     def run(self, username, password):
         user = Auth.get_user()

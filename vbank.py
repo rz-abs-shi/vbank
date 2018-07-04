@@ -14,34 +14,38 @@ def get_command_prefix():
         return '$ '
 
 
-while not command_provider.exit_command.exit:
+if __name__ == '__main__':
 
-    _input = input(get_command_prefix())
-    parts = shlex.split(_input)
+    command_provider.credit_command.run()
 
-    if not parts:
-        continue
+    while not command_provider.exit_command.exit:
 
-    for command in command_provider.get_commands():
-        prefix_len = command.has_prefix(parts)
+        _input = input(get_command_prefix())
+        parts = shlex.split(_input)
 
-        if prefix_len < 0:
+        if not parts:
             continue
 
-        params = parts[prefix_len:]
+        for command in command_provider.get_commands():
+            prefix_len = command.has_prefix(parts)
 
-        try:
-            command.validate_params(params)
-            command.run(*params)
+            if prefix_len < 0:
+                continue
 
-        except ValidationError as e:
-            print("Error: " + str(e))
-            print(command.get_description())
+            params = parts[prefix_len:]
 
-        except Exception as e:
-            print("Error: " + str(e))
+            try:
+                command.validate_params(params)
+                command.run(*params)
 
-        break
+            except ValidationError as e:
+                print("Error: " + str(e))
+                print(command.get_description())
 
-    else:
-        print("Error: No such command found. Please type `help`.")
+            except Exception as e:
+                print("Error: " + str(e))
+
+            break
+
+        else:
+            print("Error: No such command found. Please type `help`.")

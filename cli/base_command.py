@@ -48,7 +48,7 @@ class BaseCommand:
     def validate_params(self, params):
         if len(params) != len(self.get_params_template_list()):
             raise ValidationError(
-                'This command took %d params, but you provided %d' % (len(self.get_params_template_list()), len(params))
+                'This command takes %d params, but you provided %d' % (len(self.get_params_template_list()), len(params))
             )
 
     def get_params_template_list(self):
