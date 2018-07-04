@@ -9,6 +9,8 @@ class CommandProvider:
         self.credit_command = cli.general.Credit()
 
         self.all_commands = [
+
+            # general
             cli.general.Login(),
             self.help_command,
             cli.general.CreateManager(),
