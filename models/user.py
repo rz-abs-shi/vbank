@@ -1,7 +1,7 @@
 import peewee
 
 from crypto.utils import sha512
-from models import BaseModel
+from models import BaseModel, Wallet
 
 
 class User(BaseModel):
@@ -10,6 +10,8 @@ class User(BaseModel):
     secret = peewee.CharField()
 
     is_superuser = peewee.BooleanField(default=False)
+
+    wallet = peewee.ForeignKeyField(Wallet, backref='owner', unique=True)
 
     def set_password(self, password):
         self.secret = User.get_hash_of_password(self.username, password)
@@ -26,6 +28,7 @@ class User(BaseModel):
 
     @staticmethod
     def create_user(username, password):
+        wallet = Wallet.create()
         user = User(username=username)
         user.set_password(password)
         user.save()

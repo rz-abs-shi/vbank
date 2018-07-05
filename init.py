@@ -20,3 +20,6 @@ if __name__ == '__main__':
         user.save()
     except peewee.IntegrityError:
         pass
+
+    # create central bank manager
+    try:
