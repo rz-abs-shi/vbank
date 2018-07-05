@@ -1,5 +1,4 @@
 from cli import BaseCommand
-from auth import Auth
 from models import User, CentralBank
 from peewee import IntegrityError
 
@@ -11,11 +10,6 @@ class CreateManager(BaseCommand):
     help = 'Creates a central bank manager'
 
     def run(self, username, password):
-        user = Auth.get_user()
-
-        if not user or not user.is_superuser:
-            raise Exception("You should be a superuser to create a central bank manager!")
-
         try:
             manager = User.create_user(username, password)
 
@@ -25,4 +19,4 @@ class CreateManager(BaseCommand):
         CentralBank.create(manager=manager)
 
     def show(self, user):
-        return not user or user.is_superuser
+        return CentralBank.select().count() == 0

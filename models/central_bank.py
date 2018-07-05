@@ -1,4 +1,8 @@
+import random
+import string
+
 import peewee
+
 from models import BaseModel, User
 
 
@@ -12,6 +16,11 @@ class CentralBank(BaseModel):
     difficulty = peewee.SmallIntegerField(default=0)
     bank_balance_min_percent_for_loan = peewee.FloatField(default=0)
 
+
     def has_valid_configuration(self):
-        return self.number_of_transactions_in_block > 0 and self.transaction_fee > 0 and \
-               self.block_miner_reward > 0 and self.difficulty > 0 and self.bank_balance_min_percent_to_load > 0
+        return self.number_of_transactions_in_block > 0 \
+               and self.transaction_fee > 0 \
+               and self.block_miner_reward > 0 \
+               and self.difficulty > 0 \
+               and self.bank_balance_min_percent_for_loan > 0
+

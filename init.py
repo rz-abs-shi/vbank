@@ -4,7 +4,7 @@ from decouple import config
 
 
 models_list = [
-    models.User, models.Wallet, models.CentralBank, models.Bank
+    models.User, models.Wallet, models.CentralBank, models.Bank, models.BankToken,
 ]
 
 if __name__ == '__main__':
