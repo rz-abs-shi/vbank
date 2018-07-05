@@ -17,7 +17,7 @@ class Wallet:
         self.generate_key_pair()
 
     def generate_key_pair(self):
-        self.public_key, self.private_key = new_keys(2048)
+        self.public_key, self.private_key = new_keys(1024)
 
     def public_key_as_str(self):
         return self.public_key.export_key().decode()
