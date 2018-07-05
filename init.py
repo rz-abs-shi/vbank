@@ -15,11 +15,12 @@ if __name__ == '__main__':
 
     # create superuser
     try:
-        user = models.User(username=config('superuser_username'), is_superuser=True)
-        user.set_password(config('superuser_password'))
+        user = models.User.create_user(config('superuser_username'), config('superuser_password'))
+        user.is_superuser = True
         user.save()
+
     except peewee.IntegrityError:
         pass
 
     # create central bank manager
-    try:
+    # try:
