@@ -22,7 +22,7 @@ class BaseCommand:
     def get_prefix(self):
         return ' '.join(self.prefix_list)
 
-    def get_params(self):
+    def get_params_help_text(self):
         return ' '.join(['(%s)' % param for param in self.get_params_template_list()])
 
     def get_help(self):
@@ -30,7 +30,7 @@ class BaseCommand:
 
     def get_description(self):
         message = self.get_prefix()
-        params = self.get_params()
+        params = self.get_params_help_text()
 
         if params:
             message += ' ' + params

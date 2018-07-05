@@ -5,3 +5,5 @@ from .set_bank_balance_min_percent_for_loan import SetBankBalanceMinPercentForLo
 from .set_block_miner_reward import SetBlockMinerRewardCommand
 from .set_difficulty import SetDifficultyCommand
 from .set_transaction_fee import SetTransactionFeeCommand
+from .generate_token import GenerateTokenCommand
+from .see_configuration import SeeConfigurationCommand

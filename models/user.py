@@ -17,6 +17,9 @@ class User(BaseModel):
     def check_password(self, password):
         return self.secret == User.get_hash_of_password(self.username, password)
 
+    def __str__(self):
+        return self.username
+
     @staticmethod
     def get_hash_of_password(username, password):
         return sha512(username + password)
