@@ -14,7 +14,13 @@ class ShowBanksCommand(CentralBankBaseCommand):
         print("List of banks")
 
         index = 1
-        for bank in Bank.filter():
+
+        print('no\tname\tmanager\tcustomers')
+        columns_count = 4
+        print('-' * (8 * columns_count))
+
+        # TODO: filter by central bank
+        for bank in Bank.select():
             customers = Customer.filter(bank=bank)
-            print('   %d. %s managed by %s, has %d customers.' % (index, bank.bank_name, bank.manager.username, len(customers)))
+            print('%d\t%s\t%s\t%d' % (index, bank.bank_name, bank.manager.username, len(customers)))
             index += 1

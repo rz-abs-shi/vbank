@@ -41,7 +41,11 @@ def test_data():
     command_provider.get_command('SetTransactionFeeCommand').run(0.1)
     command_provider.get_command('SetNumberOfTransactionsInBlockCommand').run(4)
 
+    token = command_provider.get_command('GenerateTokenCommand').run()
+
     command_provider.get_command('Logout').run()
+
+    command_provider.get_command('CreateBank').run('mellat', '12345', 'Mellat', token)
 
 
 if __name__ == '__main__':
