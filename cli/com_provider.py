@@ -23,6 +23,7 @@ class CommandProvider:
             cli.general.Login(),
             self.help_command,
             cli.general.CreateManager(),
+            cli.general.CreateBank(),
             cli.general.Logout(),
             self.credit_command,
             self.exit_command,
@@ -42,3 +43,8 @@ class CommandProvider:
         for command in self.all_commands:
             if command.show(user):
                 self.commands.append(command)
+
+    def get_command(self, class_name):
+        for command in self.all_commands:
+            if command.__class__.__name__ == class_name:
+                return command

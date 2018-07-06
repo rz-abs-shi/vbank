@@ -16,3 +16,5 @@ class GenerateTokenCommand(CentralBankBaseCommand):
         bank_token = BankToken.create(central_bank=central_bank)
         print("Token created for creating banks!")
         print(bank_token.token)
+
+        return bank_token.token

@@ -4,11 +4,11 @@ from decouple import config
 
 
 models_list = [
-    models.User, models.Wallet, models.CentralBank, models.Bank, models.BankToken,
+    models.User, models.Wallet, models.CentralBank, models.BankToken, models.Bank,
 ]
 
-if __name__ == '__main__':
 
+def main():
     # create database and tables
     for model in models_list:
         model.create_table()
@@ -22,5 +22,26 @@ if __name__ == '__main__':
     except peewee.IntegrityError as e:
         print("Exception: " + str(e))
 
+    test_data()
+
+
+def test_data():
+    from cli import command_provider
+
     # create central bank manager
-    # try:
+    try:
+        command_provider.get_command('CreateManager').run('manager', '12345')
+    except:
+        pass
+    command_provider.get_command('Login').run('manager', '12345')
+
+    command_provider.get_command('SetBankBalanceMinPercentForLoanCommand').run(300)
+    command_provider.get_command('SetBlockMinerRewardCommand').run(0.1)
+    command_provider.get_command('SetDifficultyCommand').run(3)
+    command_provider.get_command('SetTransactionFeeCommand').run(0.1)
+    command_provider.get_command('SetNumberOfTransactionsInBlockCommand').run(4)
+
+    command_provider.get_command('Logout').run()
+
+if __name__ == '__main__':
+    main()

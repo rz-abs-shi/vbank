@@ -34,4 +34,4 @@ class CreateBank(BaseCommand):
 
     def show(self, user):
         central_bank = CentralBank.get_central_bank()
-        return central_bank and central_bank.has_valid_configuration()
+        return not user and central_bank and central_bank.has_valid_configuration()
