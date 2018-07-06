@@ -31,5 +31,12 @@ class User(BaseModel):
         wallet = Wallet.create_wallet(password)
         user = User(username=username, wallet=wallet)
         user.set_password(password)
-        user.save()
+
+        try:
+            user.save()
+        except Exception as e:
+            wallet.delete()
+
+            raise e
+
         return user

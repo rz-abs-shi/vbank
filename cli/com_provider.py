@@ -24,6 +24,7 @@ class CommandProvider:
             self.help_command,
             cli.general.CreateManager(),
             cli.general.CreateBank(),
+            cli.general.RegisterCustomer(),
             cli.general.Logout(),
             self.credit_command,
             self.exit_command,
