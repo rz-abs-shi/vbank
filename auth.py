@@ -19,12 +19,15 @@ class Auth:
         except User.DoesNotExist:
             raise Exception('No user exists with this username or password')
 
+        cls._user.wallet.decrypt(password)
+
         on_user_changed(cls._user)
 
         return cls._user
 
     @classmethod
     def logout_user(cls):
+        cls._user.wallet.truncate_keys()
         cls._user = None
         on_user_changed(cls._user)
 

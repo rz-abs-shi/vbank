@@ -19,6 +19,10 @@ class CommandProvider:
             cli.central_bank.SetBlockMinerRewardCommand(),
             cli.central_bank.SetBankBalanceMinPercentForLoanCommand(),
 
+            # user
+            cli.user.GetPublicKeyCommand(),
+            cli.user.GetPrivateKeyCommand(),
+
             # general
             cli.general.Login(),
             self.help_command,

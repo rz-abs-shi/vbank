@@ -27,6 +27,10 @@ class Wallet(BaseModel):
         except UnicodeDecodeError:
             raise Exception('Password was invalid to decode private key')
 
+    def truncate_keys(self):
+        self.public_key = None
+        self.private_key = None
+
     @staticmethod
     def create_wallet(password):
         wallet = Wallet()
