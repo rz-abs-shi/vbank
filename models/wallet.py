@@ -8,9 +8,9 @@ from models import BaseModel
 class Wallet(BaseModel):
 
     private_key_encrypted = peewee.CharField(max_length=2048)
+    public_key_str = peewee.CharField(max_length=512)
 
-    public_key = None
-    private_key = None
+    __private_key = None
 
     def decrypt(self, password):
         cipher = AESCipher(password)
@@ -21,24 +21,37 @@ class Wallet(BaseModel):
             if not private_key_str.startswith('-----BEGIN RSA PRIVATE KEY-----'):
                 raise Exception('Password was invalid to decode private key')
 
-            self.private_key = import_key(private_key_str)
-            self.public_key = self.private_key.publickey()
+            self.__private_key = import_key(private_key_str)
 
         except UnicodeDecodeError:
             raise Exception('Password was invalid to decode private key')
 
+    def get_public_key(self):
+        return import_key(self.public_key_str)
+
+    def get_private_key(self):
+        if not self.__private_key:
+            raise Exception("Private key not decrypted")
+
+        return self.__private_key
+
     def truncate_keys(self):
         self.public_key = None
-        self.private_key = None
+        self.__private_key = None
 
     @staticmethod
     def create_wallet(password):
         wallet = Wallet()
         public_key, private_key = new_keys(1024)
         private_key_as_str = private_key.export_key().decode()
+        public_key_str = public_key.export_key().decode()
 
         cipher = AESCipher(password)
         wallet.private_key_encrypted = cipher.encrypt(private_key_as_str)
+        wallet.public_key_str = public_key_str
         wallet.save()
 
         return wallet
+
+    def get_balance(self):
+        return 0

@@ -6,4 +6,5 @@ from .set_block_miner_reward import SetBlockMinerRewardCommand
 from .set_difficulty import SetDifficultyCommand
 from .set_transaction_fee import SetTransactionFeeCommand
 from .generate_token import GenerateTokenCommand
-from .see_configuration import SeeConfigurationCommand
+from .show_configuration import ShowConfigurationCommand
+from .show_banks import ShowBanksCommand

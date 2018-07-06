@@ -2,9 +2,9 @@ from cli.central_bank import CentralBankBaseCommand
 from models import BankToken
 
 
-class SeeConfigurationCommand(CentralBankBaseCommand):
+class ShowConfigurationCommand(CentralBankBaseCommand):
 
-    prefix_list = ('see', 'configuration')
+    prefix_list = ('show', 'configuration')
 
     def run(self):
         self.central_bank = self.get_central_bank()

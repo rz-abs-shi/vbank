@@ -11,7 +11,8 @@ class CommandProvider:
         self.all_commands = [
 
             # central bank
-            cli.central_bank.SeeConfigurationCommand(),
+            cli.central_bank.ShowConfigurationCommand(),
+            cli.central_bank.ShowBanksCommand(),
             cli.central_bank.GenerateTokenCommand(),
             cli.central_bank.SetNumberOfTransactionsInBlockCommand(),
             cli.central_bank.SetTransactionFeeCommand(),
