@@ -19,8 +19,8 @@ if __name__ == '__main__':
         user.is_superuser = True
         user.save()
 
-    except peewee.IntegrityError:
-        pass
+    except peewee.IntegrityError as e:
+        print("Exception: " + str(e))
 
     # create central bank manager
     # try:

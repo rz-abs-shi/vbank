@@ -23,3 +23,6 @@ class CentralBank(BaseModel):
                and self.difficulty > 0 \
                and self.bank_balance_min_percent_for_loan > 0
 
+    @staticmethod
+    def get_central_bank():
+        return CentralBank.select().first()
