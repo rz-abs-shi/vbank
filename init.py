@@ -43,5 +43,6 @@ def test_data():
 
     command_provider.get_command('Logout').run()
 
+
 if __name__ == '__main__':
     main()
