@@ -2,9 +2,9 @@ from cli.user import UserBaseCommand
 from auth import Auth
 
 
-class GetBallanceCommand(UserBaseCommand):
+class GetBalanceCommand(UserBaseCommand):
 
-    prefix_list = ('get', 'ballance')
+    prefix_list = ('get', 'balance')
 
     def run(self):
         user = Auth.get_user()

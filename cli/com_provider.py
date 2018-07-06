@@ -21,7 +21,7 @@ class CommandProvider:
             cli.central_bank.SetBankBalanceMinPercentForLoanCommand(),
 
             # user
-            cli.user.GetBallanceCommand(),
+            cli.user.GetBalanceCommand(),
             cli.user.GetPublicKeyCommand(),
             cli.user.GetPrivateKeyCommand(),
 
