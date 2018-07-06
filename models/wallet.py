@@ -28,7 +28,7 @@ class Wallet(BaseModel):
             raise Exception('Password was invalid to decode private key')
 
     @staticmethod
-    def create_new_wallet(password):
+    def create_wallet(password):
         wallet = Wallet()
         public_key, private_key = new_keys(1024)
         private_key_as_str = private_key.export_key().decode()

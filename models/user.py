@@ -28,8 +28,8 @@ class User(BaseModel):
 
     @staticmethod
     def create_user(username, password):
-        wallet = Wallet.create()
-        user = User(username=username)
+        wallet = Wallet.create_wallet(password)
+        user = User(username=username, wallet=wallet)
         user.set_password(password)
         user.save()
         return user

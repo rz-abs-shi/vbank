@@ -1,6 +1,7 @@
 from cli import BaseCommand
 from models import User, CentralBank
 from peewee import IntegrityError
+from auth import on_user_changed, Auth
 
 
 class CreateManager(BaseCommand):
@@ -17,6 +18,7 @@ class CreateManager(BaseCommand):
             raise Exception("username is duplicate, please choose another")
 
         CentralBank.create(manager=manager)
+        on_user_changed(Auth.get_user())
 
     def show(self, user):
         return CentralBank.select().count() == 0
