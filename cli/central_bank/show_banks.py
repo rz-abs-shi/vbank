@@ -15,7 +15,7 @@ class ShowBanksCommand(CentralBankBaseCommand):
 
         index = 1
 
-        print('no\tname\tmanager\tcustomers\tbalance')
+        print('no\tname\tmanager\tbalance\tcustomer')
         columns_count = 5
         print('-' * (8 * columns_count))
 
@@ -24,5 +24,7 @@ class ShowBanksCommand(CentralBankBaseCommand):
             customers = Customer.filter(bank=bank)
             balance = bank.manager.wallet.get_balance()
 
-            print('%d\t%s\t%s\t%d\t%d' % (index, bank.bank_name, bank.manager.username, len(customers), balance))
+            print('%d\t%s\t%s\t%d\t%d' % (index, bank.bank_name, bank.manager.username, balance, len(customers)))
             index += 1
+
+        print()
