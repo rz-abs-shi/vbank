@@ -18,3 +18,14 @@ class TransactionOutput:
 
     def is_mine(self, public_key_str):
         return self.recipient == public_key_str
+
+    @classmethod
+    def deserialize(cls, info: dict):
+        recipient_public_key = info['recipient_public_key']
+        value = info['value']
+        parent_transaction_id = info['parent_transaction_id']
+
+        output = TransactionOutput(recipient_public_key, value, parent_transaction_id)
+        output.id = info['id']
+
+        return output

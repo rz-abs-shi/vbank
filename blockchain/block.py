@@ -1,6 +1,7 @@
 from datetime import datetime
 from crypto.utils import sha512
 from crypto.utils import merkle_root
+from blockchain import Transaction
 
 
 class Block:
@@ -54,6 +55,21 @@ class Block:
         print("transactions_count", len(self.transactions))
         print("merkle_root:", self.get_merkle_root())
         print("timestamp:", self.timestamp)
-        print("nounce:", self.nonce)
+        print("nonce:", self.nonce)
         print("prev_hash:", self.previous_hash)
         print()
+
+    @classmethod
+    def deserialize(cls, info: dict):
+
+        block = Block('')
+        block.hash = info['hash']
+        block.previous_hash = info['prev_block']
+        block.nonce = info['nonce']
+        block.timestamp = info['time_stamp']
+        block.transactions = []
+
+        for transaction_data in info['transactions']:
+            block.transactions.append(Transaction.deserialize(transaction_data))
+
+        return block

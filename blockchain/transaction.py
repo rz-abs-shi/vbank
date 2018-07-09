@@ -98,3 +98,23 @@ class Transaction:
                 del all_utxos[inp.utxo.id]
 
         return True
+
+    @classmethod
+    def deserialize(cls, info: dict):
+        sender = info['sender_public_key']
+        receiver = info['receiver_public_key']
+        value = info['value']
+
+        inputs = []
+        for input_data in info['input']:
+            inputs.append(TransactionInput.deserialize(input_data))
+
+        outputs = []
+        for output_data in info['output']:
+            outputs.append(TransactionOutput.deserialize(output_data))
+
+        transaction = Transaction(sender, receiver, value, inputs)
+        transaction.signature = info['signature']
+        transaction.outputs = outputs
+
+        return transaction

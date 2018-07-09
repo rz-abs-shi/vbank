@@ -31,13 +31,13 @@ class BlockchainHandler:
     def load_blockchain(self):
         try:
             with open(self.BLOCKCHAIN_PATH) as f:
-                blocks = json.loads(f.read())
+                blocks_data = json.loads(f.read())
 
-                if not isinstance(blocks, dict) or not isinstance(blocks, list):
+                if not isinstance(blocks_data, dict) or not isinstance(blocks_data, list):
                     raise Exception("while loading: blockchain is not valid (1)")
 
-                if isinstance(blocks, dict):
-                    blocks = [blocks]
+                if isinstance(blocks_data, dict):
+                    blocks_data = [blocks_data]
         except:
             self.blockchain = None
             return
@@ -49,10 +49,12 @@ class BlockchainHandler:
 
         self.blockchain = BlockChain(central_bank.difficulty)
 
-        # for block in blocks:
-        #     Block()
+        for block_data in blocks_data:
+            block = Block.create(block_data)
+            self.blockchain.append_block(block, mine_block=False)
 
     def is_blockchain_imported(self):
         return bool(self.blockchain)
+
 
 blockchain_handler = BlockchainHandler()

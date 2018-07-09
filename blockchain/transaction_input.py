@@ -6,3 +6,6 @@ class TransactionInput:
         self.transaction_output_id = transaction_output_id
         self.utxo = None  # type: TransactionOutput
 
+    @classmethod
+    def deserialize(cls, info: dict):
+        return TransactionInput(info['transaction_output_id'])
