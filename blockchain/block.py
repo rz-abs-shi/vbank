@@ -1,5 +1,5 @@
 from datetime import datetime
-from crypto.utils import sha256
+from crypto.utils import sha512
 from crypto.utils import merkle_root
 
 
@@ -19,7 +19,7 @@ class Block:
     def calculate_hash(self):
 
         message = self.get_message()
-        return sha256(message)
+        return sha512(message)
 
     def mine(self, difficulty=5):
 

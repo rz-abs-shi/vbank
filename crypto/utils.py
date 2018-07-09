@@ -41,7 +41,7 @@ def merkle_root(nodes: List[str]):
         return ""
 
     elif len(nodes) == 1:
-        return sha256(nodes[0])
+        return sha512(nodes[0])
 
     layer = nodes
 
@@ -52,7 +52,7 @@ def merkle_root(nodes: List[str]):
         new_layer = [None] * (len(layer) // 2)
 
         for i in range(len(new_layer)):
-            new_layer[i] = sha256(layer[2 * i] + layer[2 * i + 1])
+            new_layer[i] = sha512(layer[2 * i] + layer[2 * i + 1])
 
         layer = new_layer
 

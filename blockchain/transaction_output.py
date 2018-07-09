@@ -1,4 +1,4 @@
-from crypto.utils import sha256
+from crypto.utils import sha512
 
 
 class TransactionOutput:
@@ -14,7 +14,7 @@ class TransactionOutput:
 
     def calculate_hash(self):
         message = self.recipient + str(self.value) + self.parent_transaction_id
-        return sha256(message)
+        return sha512(message)
 
     def is_mine(self, public_key_str):
         return self.recipient == public_key_str

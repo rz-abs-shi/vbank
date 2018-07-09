@@ -1,7 +1,6 @@
 import peewee
 
 from models import BaseModel, User
-from blockchain_handler import blockchain_handler
 
 
 class CentralBank(BaseModel):
@@ -15,6 +14,8 @@ class CentralBank(BaseModel):
     bank_balance_min_percent_for_loan = peewee.FloatField(default=0)
 
     def has_valid_configuration(self):
+        from blockchain_handler import blockchain_handler
+
         return self.number_of_transactions_in_block > 0 \
                and self.transaction_fee > 0 \
                and self.block_miner_reward > 0 \

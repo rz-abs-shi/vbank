@@ -1,4 +1,4 @@
-from crypto.utils import sha256
+from crypto.utils import sha512
 from crypto.rsa import sign, verify, import_key
 from typing import List, Dict
 from blockchain import TransactionOutput, TransactionInput
@@ -27,7 +27,7 @@ class Transaction:
 
         message = self.sender + self.recipient + str(self.value) + str(Transaction.sequence)
 
-        return sha256(message)
+        return sha512(message)
 
     def generate_signature(self, sender_private_key):
         message = self.sender + self.recipient + str(self.value)
