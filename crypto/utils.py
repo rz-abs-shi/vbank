@@ -1,7 +1,7 @@
-from Crypto.PublicKey import RSA
 import hashlib
 from typing import List
-import math
+
+from Crypto.PublicKey import RSA
 
 
 def generate_rsa_keys(bits=2048):
@@ -41,7 +41,7 @@ def merkle_root(nodes: List[str]):
         return ""
 
     elif len(nodes) == 1:
-        return sha512(nodes[0])
+        return sha256(nodes[0])
 
     layer = nodes
 
@@ -52,7 +52,7 @@ def merkle_root(nodes: List[str]):
         new_layer = [None] * (len(layer) // 2)
 
         for i in range(len(new_layer)):
-            new_layer[i] = sha512(layer[2 * i] + layer[2 * i + 1])
+            new_layer[i] = sha256(layer[2 * i] + layer[2 * i + 1])
 
         layer = new_layer
 

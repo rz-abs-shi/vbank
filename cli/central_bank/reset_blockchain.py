@@ -1,7 +1,5 @@
-from cli.central_bank import CentralBankBaseCommand
 from blockchain_handler import blockchain_handler
-from cli import command_provider
-from auth import Auth
+from cli.central_bank import CentralBankBaseCommand
 
 
 class ResetBlockchain(CentralBankBaseCommand):
@@ -11,7 +9,7 @@ class ResetBlockchain(CentralBankBaseCommand):
 
     def run(self, path):
         blockchain_handler.reset_blockchain()
-        command_provider.update(Auth.get_user())
+        self.update_commands()
 
     def show(self, user):
         return super(ResetBlockchain, self).show(user) and blockchain_handler.is_blockchain_imported()

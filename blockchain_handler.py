@@ -13,8 +13,6 @@ class BlockchainHandler:
     def __init__(self):
         self.blockchain = None
 
-        self.load_blockchain()
-
     def import_json(self, path):
         if os.path.exists(self.BLOCKCHAIN_PATH):
             raise Exception("blockchain file imported previously, if you want to reload it first reset blockchain")
@@ -33,25 +31,31 @@ class BlockchainHandler:
             with open(self.BLOCKCHAIN_PATH) as f:
                 blocks_data = json.loads(f.read())
 
-                if not isinstance(blocks_data, dict) or not isinstance(blocks_data, list):
-                    raise Exception("while loading: blockchain is not valid (1)")
+                if not (isinstance(blocks_data, dict) or isinstance(blocks_data, list)):
+                    raise Exception("blockchain.json file is not valid")
 
                 if isinstance(blocks_data, dict):
                     blocks_data = [blocks_data]
-        except:
+
+            self.blockchain = 'pending'
+            central_bank = CentralBank.get_central_bank()
+            if not central_bank.has_valid_configuration():
+                raise Exception('central bank configuration is not properly set')
+
+            self.blockchain = BlockChain(central_bank.difficulty)
+
+            for block_data in blocks_data:
+                block = Block.deserialize(block_data)
+                self.blockchain.append_block(block, mine_block=False)
+
+        except Exception as exp:
+            print("Error occurred while loading blockchain")
+            print(exp)
+
             self.blockchain = None
             return
 
-        central_bank = CentralBank.get_central_bank()
-        if not central_bank.has_valid_configuration():
-            self.blockchain = None
-            return
-
-        self.blockchain = BlockChain(central_bank.difficulty)
-
-        for block_data in blocks_data:
-            block = Block.create(block_data)
-            self.blockchain.append_block(block, mine_block=False)
+        self.blockchain.print()
 
     def is_blockchain_imported(self):
         return bool(self.blockchain)

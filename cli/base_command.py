@@ -54,5 +54,12 @@ class BaseCommand:
     def get_params_template_list(self):
         return self.params_template_list
 
+    def update_commands(self):
+        from cli import command_provider
+        from auth import Auth
+
+        command_provider.update(Auth.get_user())
+
+
 class ValidationError(Exception):
     pass

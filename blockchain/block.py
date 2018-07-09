@@ -12,10 +12,11 @@ class Block:
         self.nonce = 0
         self.timestamp = datetime.now().timestamp()
         self.transactions = []
+        self.merkle_root = self.get_merkle_root()
         self.hash = self.calculate_hash()
 
     def get_message(self):
-        return self.previous_hash + str(self.nonce) + str(self.timestamp) + self.get_merkle_root()
+        return self.previous_hash + str(self.nonce) + str(self.timestamp) + self.merkle_root
 
     def calculate_hash(self):
 
@@ -53,7 +54,7 @@ class Block:
     def print(self):
         print("hash:", self.hash)
         print("transactions_count", len(self.transactions))
-        print("merkle_root:", self.get_merkle_root())
+        print("merkle_root:", self.merkle_root)
         print("timestamp:", self.timestamp)
         print("nonce:", self.nonce)
         print("prev_hash:", self.previous_hash)
@@ -67,6 +68,7 @@ class Block:
         block.previous_hash = info['prev_block']
         block.nonce = info['nonce']
         block.timestamp = info['time_stamp']
+        block.merkle_root = info['merkle_root']
         block.transactions = []
 
         for transaction_data in info['transactions']:

@@ -1,7 +1,5 @@
-from cli.central_bank import CentralBankBaseCommand
 from blockchain_handler import blockchain_handler
-from cli import command_provider
-from auth import Auth
+from cli.central_bank import CentralBankBaseCommand
 
 
 class ImportBlockchain(CentralBankBaseCommand):
@@ -12,7 +10,7 @@ class ImportBlockchain(CentralBankBaseCommand):
 
     def run(self, path):
         blockchain_handler.import_json(path)
-        command_provider.update(Auth.get_user())
+        self.update_commands()
 
     def show(self, user):
         return super(ImportBlockchain, self).show(user) and not blockchain_handler.is_blockchain_imported()

@@ -114,6 +114,7 @@ class Transaction:
             outputs.append(TransactionOutput.deserialize(output_data))
 
         transaction = Transaction(sender, receiver, value, inputs)
+        transaction.transaction_id = info['id']
         transaction.signature = info['signature']
         transaction.outputs = outputs
 

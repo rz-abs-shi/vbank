@@ -2,6 +2,9 @@ import shlex
 
 from cli import command_provider, ValidationError
 from auth import Auth
+from blockchain_handler import blockchain_handler
+
+blockchain_handler.load_blockchain()
 
 
 def get_command_prefix():
