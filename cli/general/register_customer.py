@@ -7,7 +7,7 @@ class RegisterCustomer(BaseCommand):
 
     prefix_list = ('register', 'customer')
     params_template_list = ('username', 'password', 'bank_name')
-    help = 'Creates a bank'
+    help = 'Creates a customer'
 
     def run(self, username, password, bank_name):
 

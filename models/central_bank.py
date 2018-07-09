@@ -1,9 +1,7 @@
-import random
-import string
-
 import peewee
 
 from models import BaseModel, User
+from blockchain_handler import blockchain_handler
 
 
 class CentralBank(BaseModel):
@@ -21,7 +19,8 @@ class CentralBank(BaseModel):
                and self.transaction_fee > 0 \
                and self.block_miner_reward > 0 \
                and self.difficulty > 0 \
-               and self.bank_balance_min_percent_for_loan > 0
+               and self.bank_balance_min_percent_for_loan > 0 \
+               and blockchain_handler.is_blockchain_imported()
 
     @staticmethod
     def get_central_bank():

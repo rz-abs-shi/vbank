@@ -1,5 +1,6 @@
 from cli.central_bank import CentralBankBaseCommand
 from models import BankToken
+from blockchain_handler import blockchain_handler
 
 
 class ShowConfigurationCommand(CentralBankBaseCommand):
@@ -15,7 +16,7 @@ class ShowConfigurationCommand(CentralBankBaseCommand):
         print("  Block miner reward: " + self.get_param('block_miner_reward'))
         print("  Difficulty: " + self.get_param('difficulty'))
         print("  Bank balance min percent for loan: " + self.get_param('bank_balance_min_percent_for_loan'))
-
+        print("  Blockchain imported: " + str(blockchain_handler.is_blockchain_imported()))
 
     def get_param(self, key):
         value = getattr(self.central_bank, key)

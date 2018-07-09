@@ -19,6 +19,8 @@ class CommandProvider:
             cli.central_bank.SetDifficultyCommand(),
             cli.central_bank.SetBlockMinerRewardCommand(),
             cli.central_bank.SetBankBalanceMinPercentForLoanCommand(),
+            cli.central_bank.ImportBlockchain(),
+            cli.central_bank.ResetBlockchain(),
 
             # user
             cli.user.GetBalanceCommand(),

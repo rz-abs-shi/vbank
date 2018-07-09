@@ -1,6 +1,6 @@
 import peewee
 
-vbank_db = peewee.SqliteDatabase('vbank.db')
+vbank_db = peewee.SqliteDatabase('resources/vbank.db')
 
 
 class BaseModel(peewee.Model):

@@ -8,3 +8,5 @@ from .set_transaction_fee import SetTransactionFeeCommand
 from .generate_token import GenerateTokenCommand
 from .show_configuration import ShowConfigurationCommand
 from .show_banks import ShowBanksCommand
+from .import_blockchain import ImportBlockchain
+from .reset_blockchain import ResetBlockchain
