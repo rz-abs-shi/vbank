@@ -1,5 +1,7 @@
 import peewee
 
+from blockchain import Wallet as WalletLogic
+from blockchain_handler import blockchain_handler
 from crypto.aes import AESCipher
 from crypto.rsa import new_keys, import_key
 from models import BaseModel
@@ -17,9 +19,6 @@ class Wallet(BaseModel):
 
         try:
             private_key_str = cipher.decrypt(self.private_key_encrypted)
-
-            if not private_key_str.startswith('-----BEGIN RSA PRIVATE KEY-----'):
-                raise Exception('Password was invalid to decode private key')
 
             self.__private_key = import_key(private_key_str)
 
@@ -54,4 +53,11 @@ class Wallet(BaseModel):
         return wallet
 
     def get_balance(self):
-        return 0
+        wallet = self.get_wallet_logic()
+        return wallet.get_balance(blockchain_handler.all_utxos)
+
+    def get_wallet_logic(self):
+        w = WalletLogic()
+        w.public_key_str = self.public_key_str
+        w.private_key = self.__private_key
+        return w

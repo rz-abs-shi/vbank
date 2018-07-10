@@ -24,6 +24,7 @@ class CommandProvider:
 
             # user
             cli.user.GetBalanceCommand(),
+            cli.user.TransferMoneyCommand(),
             cli.user.GetPublicKeyCommand(),
             cli.user.GetPrivateKeyCommand(),
 
