@@ -3,7 +3,6 @@ import os
 from shutil import copyfile
 
 from blockchain import BlockChain, Block, Wallet
-from models import CentralBank
 
 
 class BlockchainHandler:
@@ -30,6 +29,8 @@ class BlockchainHandler:
         self.load_blockchain()
 
     def load_blockchain(self):
+        from models import CentralBank
+
         try:
             with open(self.BLOCKCHAIN_PATH) as f:
                 blocks_data = json.loads(f.read())

@@ -41,7 +41,7 @@ class Wallet:
     def send_funds(self, all_utxos, recipient_public_key_str: str, value: float) -> Transaction:
         self.update_utxos(all_utxos)
 
-        if self.get_balance() < value:
+        if self.get_balance(all_utxos) < value:
             raise Exception("Not enough balance, transaction discarded")
 
         if value <= 0:

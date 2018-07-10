@@ -11,6 +11,7 @@ class TransferMoneyCommand(UserBaseCommand):
 
     def run(self, amount, receiver_username):
         sender = Auth.get_user()
+        amount = int(amount)
 
         if amount <= 0:
             raise Exception("Amount should be positive")
@@ -22,5 +23,6 @@ class TransferMoneyCommand(UserBaseCommand):
 
         blockchain_handler.new_transaction(
             sender.wallet.get_wallet_logic(),
-            receiver.wallet.get_wallet_logic()
+            receiver.wallet.get_wallet_logic(),
+            amount
         )
