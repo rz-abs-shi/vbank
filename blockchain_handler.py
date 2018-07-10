@@ -75,6 +75,7 @@ class BlockchainHandler:
         return bool(self.blockchain)
 
     def new_transaction(self, sender_wallet: Wallet, receiver_wallet: Wallet, amount):
+
         if not self.current_block:
             self.current_block = Block(self.blockchain.last_block_hash())
 

@@ -24,7 +24,7 @@ class ShowBanksCommand(CentralBankBaseCommand):
             customers = Customer.filter(bank=bank)
             balance = bank.manager.wallet.get_balance()
 
-            print('%d\t%s\t%s\t%d\t%d' % (index, bank.bank_name, bank.manager.username, balance, len(customers)))
+            print('%d\t%s\t%s\t%.2f\t%d' % (index, bank.bank_name, bank.manager.username, balance, len(customers)))
             index += 1
 
         print()

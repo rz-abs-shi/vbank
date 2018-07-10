@@ -11,6 +11,6 @@ class GetBalanceCommand(UserBaseCommand):
 
         balance = user.wallet.get_balance()
 
-        print("Your balance is %d coins" % balance)
+        print("Your balance is %.2f coins" % balance)
 
         return balance
