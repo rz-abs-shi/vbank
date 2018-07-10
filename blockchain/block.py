@@ -2,6 +2,7 @@ from datetime import datetime
 from crypto.utils import sha512
 from crypto.utils import merkle_root
 from blockchain import Transaction
+from base64 import b64encode
 
 
 class Block:
@@ -54,6 +55,15 @@ class Block:
     def print(self):
         print("hash:", self.hash)
         print("transactions_count", len(self.transactions))
+
+        for i in range(len(self.transactions)):
+            t = self.transactions[i]
+            print("  Transaction %d" % i)
+            print("    id: %s" % t.transaction_id)
+            print("    sender: %s" % t.sender)
+            print("    recipient: %s" % t.recipient)
+            print("    signature: %s" % t.get_signature_as_str())
+
         print("merkle_root:", self.merkle_root)
         print("timestamp:", self.timestamp)
         print("nonce:", self.nonce)

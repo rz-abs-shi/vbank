@@ -2,7 +2,7 @@ from crypto.utils import sha512
 from crypto.rsa import sign, verify, import_key, pem_format
 from typing import List, Dict
 from blockchain import TransactionOutput, TransactionInput
-
+from base64 import b64encode
 
 class Transaction:
 
@@ -40,6 +40,12 @@ class Transaction:
         message = self.sender + self.recipient + str(self.value)
         sender_public_key = import_key(pem_format(self.sender))
         return verify(message.encode(), self.signature, sender_public_key)
+
+    def get_signature_as_str(self):
+        if isinstance(self.signature, str):
+            return self.signature
+        else:
+            return b64encode(self.signature).decode()
 
     def get_outputs_value(self):
 

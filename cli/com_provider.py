@@ -13,6 +13,7 @@ class CommandProvider:
             # central bank
             cli.central_bank.ShowConfigurationCommand(),
             cli.central_bank.ShowBanksCommand(),
+            cli.central_bank.ShowBlockchainCommand(),
             cli.central_bank.GenerateTokenCommand(),
             cli.central_bank.SetNumberOfTransactionsInBlockCommand(),
             cli.central_bank.SetTransactionFeeCommand(),

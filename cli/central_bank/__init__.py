@@ -10,3 +10,4 @@ from .show_configuration import ShowConfigurationCommand
 from .show_banks import ShowBanksCommand
 from .import_blockchain import ImportBlockchain
 from .reset_blockchain import ResetBlockchain
+from .show_blockchain import ShowBlockchainCommand
