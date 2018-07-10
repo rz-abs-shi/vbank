@@ -1,7 +1,7 @@
 from typing import Dict
 
 from Crypto.PublicKey.RSA import RsaKey
-
+from crypto.rsa import one_line_format
 from blockchain import TransactionOutput, Transaction, TransactionInput
 
 
@@ -14,7 +14,7 @@ class Wallet:
         self.utxos = {}  # type: Dict[str, TransactionOutput]
 
     def private_key_as_str(self):
-        return self.private_key.export_key().decode()
+        return one_line_format(self.private_key.export_key().decode())
 
     def print(self):
         print("Public key: " + self.public_key_str)

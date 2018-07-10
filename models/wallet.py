@@ -3,7 +3,7 @@ import peewee
 from blockchain import Wallet as WalletLogic
 from blockchain_handler import blockchain_handler
 from crypto.aes import AESCipher
-from crypto.rsa import new_keys, import_key
+from crypto.rsa import new_keys, import_key, one_line_format, pem_format
 from models import BaseModel
 
 
@@ -20,19 +20,22 @@ class Wallet(BaseModel):
         try:
             private_key_str = cipher.decrypt(self.private_key_encrypted)
 
-            self.__private_key = import_key(private_key_str)
+            self.__private_key = import_key(pem_format(private_key_str))
 
         except UnicodeDecodeError:
             raise Exception('Password was invalid to decode private key')
 
     def get_public_key(self):
-        return import_key(self.public_key_str)
+        return import_key(pem_format(self.public_key_str))
 
     def get_private_key(self):
         if not self.__private_key:
             raise Exception("Private key not decrypted")
 
         return self.__private_key
+
+    def get_private_key_str(self):
+        return one_line_format(self.get_private_key().export_key().decode())
 
     def truncate_keys(self):
         self.public_key = None
@@ -42,8 +45,8 @@ class Wallet(BaseModel):
     def create_wallet(password):
         wallet = Wallet()
         public_key, private_key = new_keys(1024)
-        private_key_as_str = private_key.export_key().decode()
-        public_key_str = public_key.export_key().decode()
+        private_key_as_str = one_line_format(private_key.export_key().decode())
+        public_key_str = one_line_format(public_key.export_key().decode())
 
         cipher = AESCipher(password)
         wallet.private_key_encrypted = cipher.encrypt(private_key_as_str)

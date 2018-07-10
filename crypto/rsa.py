@@ -4,6 +4,7 @@ from Crypto.Signature import PKCS1_v1_5
 from Crypto.Hash import SHA512, SHA384, SHA256, SHA, MD5
 from Crypto import Random
 from base64 import b64encode, b64decode
+import math
 
 hash = "SHA-256"
 
@@ -66,3 +67,31 @@ def verify(message, signature, pub_key):
         digest = MD5.new()
     digest.update(message)
     return signer.verify(digest, signature)
+
+
+def one_line_format(pem_key):
+    to_remove_strs = [
+        '-----BEGIN PUBLIC KEY-----',
+        '-----END PUBLIC KEY-----',
+        '-----BEGIN RSA PRIVATE KEY-----',
+        '-----END RSA PRIVATE KEY-----',
+        '\n',
+    ]
+
+    for to_remove in to_remove_strs:
+        pem_key = pem_key.replace(to_remove, '')
+
+    return pem_key
+
+
+def pem_format(one_line_key):
+    pem = ''
+
+    for i in range(int(math.ceil(len(one_line_key) / 64))):
+        pem += one_line_key[i * 64: (i + 1) * 64] + '\n'
+
+    if len(one_line_key) > 500:
+        return '-----BEGIN RSA PRIVATE KEY-----\n' + pem + '-----END RSA PRIVATE KEY-----'
+
+    else:
+        return '-----BEGIN PUBLIC KEY-----\n' + pem + '-----END PUBLIC KEY-----'

@@ -9,7 +9,7 @@ class GetPrivateKeyCommand(UserBaseCommand):
     def run(self):
         user = Auth.get_user()
 
-        private_key = user.wallet.get_private_key().export_key().decode()
+        private_key = user.wallet.get_private_key_str()
 
         print(private_key)
 

@@ -1,5 +1,5 @@
 from crypto.utils import sha512
-from crypto.rsa import sign, verify, import_key
+from crypto.rsa import sign, verify, import_key, pem_format
 from typing import List, Dict
 from blockchain import TransactionOutput, TransactionInput
 
@@ -38,7 +38,7 @@ class Transaction:
             return False
 
         message = self.sender + self.recipient + str(self.value)
-        sender_public_key = import_key(self.sender)
+        sender_public_key = import_key(pem_format(self.sender))
         return verify(message.encode(), self.signature, sender_public_key)
 
     def get_outputs_value(self):
